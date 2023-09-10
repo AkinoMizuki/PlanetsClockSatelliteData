@@ -1,0 +1,16 @@
+{
+	"private": true,
+	"name": "@virtual-space-program/cosmorium-external-data",
+	"type": "module",
+	"dependencies": {
+		"@actions/core": "^1.10.0",
+		"js-yaml": "^4.1.0"
+	},
+	"devDependencies": {
+		"@esperecyan/eslint-config": "^2.5.0",
+		"eslint": "^8.38.0"
+	},
+	"scripts": {
+		"build": "node fetch-data.js"
+	}
+}
