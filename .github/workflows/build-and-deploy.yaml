@@ -8,23 +8,23 @@ jobs:
     build:
         permissions:
             contents: write
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-24.04
         steps:
             - name: メインブランチをチェックアウト
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: メインブランチへ60日間コミットがないと、スケジュールされたワークフローが停止するのを防止
               # https://docs.github.com/actions/managing-workflow-runs/disabling-and-enabling-a-workflow
               uses: gautamkrishnar/keepalive-workflow@790c7f09285a59b09bb578c85e271c6ff2af97c4 #v1.1.0
 
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v4
               with:
-                node-version: '18'
+                node-version: '22'
 
             # https://docs.github.com/ja/actions/using-workflows/caching-dependencies-to-speed-up-workflows#example-using-the-cache-action
             - name: Cache node modules
               id: cache-npm
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               env:
                 cache-name: cache-node-modules
               with:
@@ -45,7 +45,7 @@ jobs:
             - run: npm run build
 
             - name: GitHub Pages用のデータをアップロード
-              uses: actions/upload-pages-artifact@v1
+              uses: actions/upload-pages-artifact@v3
               with:
                 path: _site/
 
@@ -55,7 +55,7 @@ jobs:
         permissions:
             pages: write
             id-token: write
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-24.04
         steps:
             - name: Deploy to GitHub Pages
-              uses: actions/deploy-pages@v2
+              uses: actions/deploy-pages@v4
